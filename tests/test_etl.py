@@ -66,7 +66,7 @@ def test_carga_es_idempotente(tmp_path):
 def test_pipeline_completo_con_datos_de_ejemplo(tmp_path):
     db = tmp_path / "ventas.db"
     leidas, cargadas = ejecutar("data/ventas.csv", db, HOY)
-    assert (leidas, cargadas) == (5, 3)  # RETO 4: roto a propósito
+    assert (leidas, cargadas) == (5, 2)
     with sqlite3.connect(db) as con:
         filas = con.execute("SELECT id_venta, monto FROM ventas ORDER BY id_venta").fetchall()
     assert filas == [(1, 100.5), (4, 75.0)]
