@@ -13,3 +13,11 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python -m pytest -v
       - run: python etl.py
+
+  docker:
+    needs: pruebas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t pipeline-ventas .
+      - run: docker run --rm pipeline-ventas
